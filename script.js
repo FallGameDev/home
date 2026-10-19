@@ -57,11 +57,9 @@ const FAQS = [
   { q:"Are you family friendly?",
     a:"Mostly. The games are fine for pretty much everyone. Rage clips can get a little loud." },
   { q:"How can I contact you?",
-    // TODO: put your email in the mailto link below
-    a:'Message me on <a href="https://www.youtube.com/@FallGameDev" target="_blank" rel="noopener">YouTube</a> or send me an <a href="mailto:">email</a>.' },
+    a:'Message me on <a href="https://www.youtube.com/@FallGameDev" target="_blank" rel="noopener">YouTube</a> or email me at <a href="mailto:fallgamedev@proton.me">fallgamedev@proton.me</a>.' },
   { q:"What do you use to edit your videos?",
-    // TODO: write which editor you use
-    a:"Answer coming soon." },
+    a:"Canva. Quick, easy, and it gets the job done." },
   { q:"Are your games free?",
     a:"Yep. Everything in the Games section runs right in your browser. No downloads, no paying." },
   { q:"What do you make your games with?",
