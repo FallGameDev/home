@@ -47,6 +47,29 @@ const TYPED_LINES = [
   "I ship. <b>Eventually.</b>",
 ];
 
+// FAQ questions and answers. Answers can include links (HTML is allowed).
+// "openQ" is optional: the question text switches to it while the answer is open.
+const FAQS = [
+  { q:"Do you use AI?",
+    a:"Yep, as a helper for code and fixing bugs. The ideas, the art, the characters and the final calls are all mine." },
+  { q:"How old are you?", openQ:"ARE YOU SUPER DUPER AWESOME AND COOL?!?!?",
+    a:"Yes." },
+  { q:"Are you family friendly?",
+    a:"Mostly. The games are fine for pretty much everyone. Rage clips can get a little loud." },
+  { q:"How can I contact you?",
+    // TODO: put your email in the mailto link below
+    a:'Message me on <a href="https://www.youtube.com/@FallGameDev" target="_blank" rel="noopener">YouTube</a> or send me an <a href="mailto:">email</a>.' },
+  { q:"What do you use to edit your videos?",
+    // TODO: write which editor you use
+    a:"Answer coming soon." },
+  { q:"Are your games free?",
+    a:"Yep. Everything in the Games section runs right in your browser. No downloads, no paying." },
+  { q:"What do you make your games with?",
+    a:"Mostly plain HTML, CSS and JavaScript, plus Roblox Studio and GameMaker. Check the Toolbox section for the full list." },
+  { q:"Can I suggest a game idea?",
+    a:'Sure! Send it to me on <a href="https://www.youtube.com/@FallGameDev" target="_blank" rel="noopener">YouTube</a>. No promises, but I read them.' },
+];
+
 /* =========================================================
    PIXEL ART
    An 8x8 grid used for the logo and the falling leaves.
@@ -182,6 +205,20 @@ TOOLS.forEach(t => {
   invEl.appendChild(s);
 });
 document.getElementById("engineCount").textContent = TOOLS.length;
+
+// FAQ accordion (uses <details> so it works with a keyboard too)
+const faqEl = document.getElementById("faqList");
+FAQS.forEach(f => {
+  const d = document.createElement("details");
+  d.className = "faq" + (f.openQ ? " loud" : "");
+  d.innerHTML = `<summary>${f.q}</summary><p>${f.a}</p>`;
+  // Swap the question text while open, if this one has an "openQ"
+  if (f.openQ){
+    const sum = d.querySelector("summary");
+    d.addEventListener("toggle", () => { sum.textContent = d.open ? f.openQ : f.q; });
+  }
+  faqEl.appendChild(d);
+});
 
 // Logo leaf
 drawPixel(document.getElementById("logoLeaf"), PIXEL_ICONS.leaf, { a:"#ffb347", b:"#7a3a1a" });
@@ -319,7 +356,7 @@ function loop(){
 
 // Clicking empty space tries to grab a leaf near the pointer
 window.addEventListener("pointerdown", e => {
-  if (e.target.closest("a, button, .card, .slot, .what, .statcard")) return; // don't steal real clicks
+  if (e.target.closest("a, button, .card, .slot, .what, .statcard, .faq")) return; // don't steal real clicks
   const mx = e.clientX * DPR, my = e.clientY * DPR;
   let best = -1, bestD = 34 * DPR;
   leaves.forEach((l, i) => {
