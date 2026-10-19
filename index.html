@@ -174,32 +174,13 @@ h2{font-size:clamp(36px,6vw,64px);font-weight:800;letter-spacing:-.03em;line-hei
 .card-link:hover{gap:10px}
 .card-link.off{color:var(--muted);pointer-events:none}
 
-/* ---------- Channel section ---------- */
-.channel{display:grid;grid-template-columns:1.3fr 1fr;gap:20px}
-.screen{
-  position:relative;border-radius:var(--radius);overflow:hidden;min-height:340px;
-  background:linear-gradient(135deg,#2a0f12,#5c1f1a 45%,#c7362f);
-  border:1px solid var(--line);display:grid;place-items:center;text-decoration:none;
-}
-/* CRT scanlines */
-.screen::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 2px,transparent 2px 4px);pointer-events:none}
-.screen .rec{position:absolute;top:16px;left:16px;font-family:var(--pixel);font-size:12px;display:flex;gap:8px;align-items:center}
-.screen .rec i{width:10px;height:10px;border-radius:50%;background:#ff3b3b;animation:blink 1s infinite}
-.play-btn{width:86px;height:86px;border-radius:50%;background:var(--ink);display:grid;place-items:center;transition:transform .25s;box-shadow:0 0 0 12px rgba(245,234,220,.12)}
-.play-btn::after{content:"";border-left:26px solid var(--maple);border-top:16px solid transparent;border-bottom:16px solid transparent;margin-left:7px}
-.screen:hover .play-btn{transform:scale(1.1)}
-.screen .cap{position:absolute;bottom:18px;left:18px;right:18px;font-family:var(--display);font-weight:800;font-size:clamp(22px,3vw,32px);line-height:1.1}
-.screen .cap small{display:block;font-family:var(--mono);font-weight:400;font-size:13px;color:rgba(245,234,220,.75);margin-top:6px}
-.shows{display:grid;gap:20px}
-.show{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:border-color .2s}
-.show:hover{border-color:var(--rust)}
-.show .tag{font-family:var(--pixel);font-size:11px;color:var(--gold)}
-.show h3{font-size:24px;font-weight:800;margin:8px 0 6px}
-.show p{color:var(--muted);font-size:15px}
-.meter{margin-top:16px;font-family:var(--mono);font-size:12px;color:var(--muted)}
-.meter .bar{height:8px;background:var(--bg-3);border-radius:99px;margin-top:6px;overflow:hidden}
-.meter .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--amber),var(--maple));border-radius:inherit;width:0;transition:width 1.4s cubic-bezier(.2,.9,.3,1)}
-.reveal.in .meter .bar i{width:var(--w)}
+/* ---------- What I do ---------- */
+.whatgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.what{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s, transform .2s}
+.what:hover{border-color:var(--amber);transform:translateY(-4px)}
+.what-num{font-family:var(--pixel);font-size:12px;color:var(--rust)}
+.what h3{font-size:26px;font-weight:800;letter-spacing:-.02em}
+.what p{color:var(--muted);font-size:15px;flex:1}
 
 /* ---------- Toolbox: inventory style ---------- */
 .inventory{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
@@ -210,18 +191,15 @@ h2{font-size:clamp(36px,6vw,64px);font-weight:800;letter-spacing:-.03em;line-hei
 .slot:hover{transform:translateY(-4px)}
 .slot .ico{font-family:var(--pixel);font-size:26px;line-height:1;margin-bottom:12px;display:block}
 .slot strong{display:block;font-size:15px}
-.slot .rarity{font-family:var(--pixel);font-size:10px;margin-top:6px;display:block}
 .slot .tip{
   position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%) translateY(6px);
   width:200px;background:var(--ink);color:var(--bg);font-size:13px;padding:10px 12px;border-radius:10px;
   opacity:0;pointer-events:none;transition:all .2s;z-index:5;font-family:var(--mono);text-align:left;
 }
 .slot:hover .tip{opacity:1;transform:translateX(-50%)}
-/* rarity colors, like loot in an RPG */
-.r-common{--rc:#a8968a} .r-rare{--rc:var(--sky)} .r-epic{--rc:#c58bff} .r-legend{--rc:var(--amber)}
-.slot .rarity,.slot .ico{color:var(--rc)}
-.slot:hover{border-color:var(--rc)}
-.r-legend{box-shadow:inset 0 0 30px -10px rgba(255,179,71,.4)}
+/* every slot uses the amber accent */
+.slot .ico{color:var(--amber)}
+.slot:hover{border-color:var(--amber)}
 
 /* ---------- About ---------- */
 .about{display:grid;grid-template-columns:1.4fr 1fr;gap:50px;align-items:start}
@@ -247,7 +225,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px}
 /* ---------- Phones and small tablets ---------- */
 @media (max-width:820px){
   .nav-links{display:none}
-  .channel,.about{grid-template-columns:1fr}
+  .whatgrid,.about{grid-template-columns:1fr}
   section{padding:80px 0}
 }
 
@@ -269,7 +247,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px}
     <a href="#top" class="logo"><canvas id="logoLeaf" width="8" height="8"></canvas>FallGameDev</a>
     <ul class="nav-links">
       <li><a href="#games">Games</a></li>
-      <li><a href="#channel">Channel</a></li>
+      <li><a href="#what">What I do</a></li>
       <li><a href="#toolbox">Toolbox</a></li>
       <li><a href="#about">About</a></li>
     </ul>
@@ -310,35 +288,32 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px}
     <div class="grid" id="grid"></div>
   </section>
 
-  <!-- ================= YOUTUBE ================= -->
-  <section id="channel" class="wrap">
+  <!-- ================= WHAT I DO ================= -->
+  <section id="what" class="wrap">
     <div class="sec-head reveal">
       <div>
-        <div class="sec-label">02 / CHANNEL</div>
-        <h2>I also yell at games</h2>
+        <div class="sec-label">02 / WHAT I DO</div>
+        <h2>What I do</h2>
       </div>
-      <p class="sec-sub">When I'm not making games, I'm losing at them on camera.</p>
+      <p class="sec-sub">Three things, mostly at the same time.</p>
     </div>
-    <div class="channel reveal">
-      <!-- TODO: swap "#" for your real YouTube channel link -->
-      <a class="screen" href="#" target="_blank" rel="noopener">
-        <span class="rec"><i></i>REC</span>
-        <span class="play-btn"></span>
-        <span class="cap">Watch on YouTube<small>rage clips &middot; VR streams &middot; questionable decisions</small></span>
-      </a>
-      <div class="shows">
-        <div class="show">
-          <span class="tag">SERIES</span>
-          <h3>Rage Clips</h3>
-          <p>Short, loud, and honest. The moments where the game wins and I do not take it well.</p>
-          <div class="meter">Rage level<div class="bar"><i style="--w:94%"></i></div></div>
-        </div>
-        <div class="show">
-          <span class="tag">STREAMS</span>
-          <h3>BONELAB in VR</h3>
-          <p>Physics chaos with a headset on. Things get thrown. Sometimes it's me.</p>
-          <div class="meter">Chaos level<div class="bar"><i style="--w:81%"></i></div></div>
-        </div>
+    <div class="whatgrid reveal">
+      <div class="what">
+        <span class="what-num">01</span>
+        <h3>Make games</h3>
+        <p>Browser games you can play in one click, plus projects in Roblox and GameMaker. Horror, clickers, remakes, whatever I can't stop thinking about.</p>
+      </div>
+      <div class="what">
+        <span class="what-num">02</span>
+        <h3>Build web tools</h3>
+        <p>Apps like Bob AI, with real logins, databases and AI hooked up behind them. If a tool doesn't exist yet, I make it.</p>
+      </div>
+      <div class="what">
+        <span class="what-num">03</span>
+        <h3>Make videos</h3>
+        <p>Rage clips and VR streams on YouTube, mostly BONELAB. Things get thrown. Sometimes it's me.</p>
+        <!-- TODO: swap "#" for your real YouTube channel link -->
+        <a class="card-link" href="#" target="_blank" rel="noopener">Watch on YouTube &#8594;</a>
       </div>
     </div>
   </section>
@@ -350,7 +325,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px}
         <div class="sec-label">03 / TOOLBOX</div>
         <h2>Inventory</h2>
       </div>
-      <p class="sec-sub">Every engine I've picked up along the way. Hover a slot to inspect it.</p>
+      <p class="sec-sub">The tools I actually use. Hover a slot to inspect it.</p>
     </div>
     <div class="inventory reveal" id="inventory"></div>
   </section>
@@ -365,13 +340,13 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px}
     </div>
     <div class="about reveal">
       <div>
-        <p>I make games under the name <b>FallGameDev</b> and run a tiny studio called <b>Wildcard Studios</b>.</p>
+        <p>I make games under the name <b>FallGameDev</b> and run a tiny studio called <b>Here Studios</b>.</p>
         <p>I learn by building. If a game makes me think "how did they do that?", I usually end up remaking it in a browser tab until I figure it out.</p>
-        <p>I've bounced between <b>Scratch, Roblox, GameMaker, Godot</b> and the web, and the web is where most of my stuff lives now: one file, no installs, just click and play.</p>
+        <p>I've bounced between <b>Roblox, GameMaker</b> and the web, and the web is where most of my stuff lives now: one file, no installs, just click and play.</p>
       </div>
       <div class="statcard">
         <div class="stat"><span>Class</span><b>Indie Dev / YouTuber</b></div>
-        <div class="stat"><span>Studio</span><b>Wildcard Studios (est. 2025)</b></div>
+        <div class="stat"><span>Studio</span><b>Here Studios</b></div>
         <div class="stat"><span>Engines unlocked</span><b id="engineCount">6</b></div>
         <div class="stat"><span>Studio cats</span><b>Lucky &amp; Nugget</b></div>
         <div class="stat"><span>Leaves collected</span><b id="leafStat">0</b></div>
@@ -393,7 +368,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px}
       <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">YouTube</a>
     </div>
     <div class="foot-bottom">
-      <span>&copy; <span id="year"></span> FallGameDev / Wildcard Studios</span>
+      <span>&copy; <span id="year"></span> FallGameDev / Here Studios</span>
       <span>Made with HTML, CSS, JS and a lot of leaves.</span>
     </div>
   </div>
@@ -432,20 +407,17 @@ const PROJECTS = [
 // Faces the Clicker Game thumbnail cycles through (one every 2 seconds)
 const CLICKER_FACES = ["😀","😎","🤑","😂","🤯","🥳","😤","🤩","😴","🤓","😈","🫠"];
 
-// Toolbox "inventory" items. rarity: common, rare, epic, legend
+// Toolbox "inventory" items
 const TOOLS = [
-  { name:"HTML / CSS / JS", ico:"</>", rarity:"legend", tip:"Main weapon. Most of my games live in one HTML file you can play anywhere." },
-  { name:"Godot 4", ico:"G4", rarity:"epic", tip:"Open source engine. Great for 2D and 3D experiments." },
-  { name:"GameMaker", ico:"GM", rarity:"epic", tip:"GameMaker Studio 2. Platformers, GML, and a lot of sprite wrangling." },
-  { name:"Roblox Studio", ico:"[R]", rarity:"rare", tip:"Where the Eddie's games got a 3D life." },
-  { name:"Scratch", ico:"=^.^=", rarity:"rare", tip:"Where it all started. Still undefeated for quick ideas." },
-  { name:"Rec Room", ico:"VR", rarity:"common", tip:"Built rooms in VR before creator tools shut down. Legacy item." },
-  { name:"Supabase", ico:"DB", rarity:"epic", tip:"Logins, leaderboards, and chat for my web games." },
-  { name:"AI APIs", ico:"*AI*", rarity:"rare", tip:"Hooked up Anthropic and OpenAI APIs in a few projects." },
+  { name:"HTML / CSS / JS", ico:"</>", tip:"Main weapon. Most of my games live in one HTML file you can play anywhere." },
+  { name:"GameMaker", ico:"GM", tip:"GameMaker Studio 2. GML, platformer physics, and a lot of sprite wrangling." },
+  { name:"Roblox Studio", ico:"[R]", tip:"Where the Eddie's games got a 3D life." },
+  { name:"Supabase", ico:"DB", tip:"Logins, leaderboards, and chat for my web games." },
+  { name:"AI APIs", ico:"*AI*", tip:"Hooked up Anthropic and OpenAI APIs in a few projects." },
 ];
 
 // Words for the scrolling ticker strip
-const TICKER = ["GAMEMAKER","GODOT 4","ROBLOX","SCRATCH","HTML / CSS / JS","REC ROOM","SUPABASE","BONELAB","SINGLE FILE GAMES"];
+const TICKER = ["GAMEMAKER","ROBLOX","HTML / CSS / JS","SUPABASE","AI APIS","BONELAB","SINGLE FILE GAMES"];
 
 // Lines the hero "types" out, one after another
 const TYPED_LINES = [
@@ -581,12 +553,11 @@ function addTilt(card){
 
 // Inventory slots
 const invEl = document.getElementById("inventory");
-const RARITY_NAME = { common:"COMMON", rare:"RARE", epic:"EPIC", legend:"LEGENDARY" };
 TOOLS.forEach(t => {
   const s = document.createElement("div");
-  s.className = "slot r-" + t.rarity;
+  s.className = "slot";
   s.innerHTML = `<span class="ico">${t.ico.replace(/</g,"&lt;").replace(/>/g,"&gt;")}</span>
-    <strong>${t.name}</strong><span class="rarity">${RARITY_NAME[t.rarity]}</span>
+    <strong>${t.name}</strong>
     <span class="tip">${t.tip}</span>`;
   invEl.appendChild(s);
 });
@@ -728,7 +699,7 @@ function loop(){
 
 // Clicking empty space tries to grab a leaf near the pointer
 window.addEventListener("pointerdown", e => {
-  if (e.target.closest("a, button, .card, .slot, .show, .statcard")) return; // don't steal real clicks
+  if (e.target.closest("a, button, .card, .slot, .what, .statcard")) return; // don't steal real clicks
   const mx = e.clientX * DPR, my = e.clientY * DPR;
   let best = -1, bestD = 34 * DPR;
   leaves.forEach((l, i) => {
